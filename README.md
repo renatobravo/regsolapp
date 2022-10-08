@@ -7,9 +7,9 @@ pudiendo hacer seguimientos e informes con los datos.
 <br>
 <img src="/src/public/img/vista2.png" alt="Vista 2">
 <br>
-<img src="/src/public/img/vista3.png" alt="Vista 3">
-<br>
 <img src="/src/public/img/vista4.png" alt="Vista 4">
+<br>
+<img src="/src/public/img/vista3.png" alt="Vista 3">
 <br>
 <img src="/src/public/img/vista5.png" alt="Vista 5">
 <br>
