@@ -1,0 +1,110 @@
+<!--NAV-->
+<nav class="navbar navbar-expand-lg navbar-dark nav-bar">
+  <a class="navbar-brand" href="/">
+    <img src="img/regsol.png" width="180" height="65" />
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto"></ul>
+    <form class="form-inline my-2 my-lg-0">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item mx-1">
+          <a id="userlink" class="nav-link" href="">Usuario</a>
+        </li>
+        <li class="nav-item mx-1">
+          <a id="signoutlink" class="nav-link" href="">Cerrar Sesión</a>
+        </li>
+      </ul>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<script type="module" src="./js/signup.js"></script>
+<!--Validaciones Server-->
+{{#if message}}
+<div style="text-align: center" class="alert alert-{{type}}">
+  <button type="button" class="close" data-dismiss="alert">&times;</button>
+  <strong>{{intro}}</strong> {{message}}
+</div>
+{{/if}}
+
+<!--Validaciones Server Form-->
+{{#if validaciones}}
+  {{#each validaciones}}
+  <div style="text-align: center" class="alert alert-warning mt-10" role="alert">
+    <button type="button" class="close" data-dismiss="alert">&times;</button>
+    {{this.msg}}
+  </div>
+  {{/each}}
+{{/if}}
+<br>
+<div class="mb-5 formake">
+  <div>
+    <center>
+      <h4 class="mb-3 mt-3">« Crear Cuenta »</h4>
+    </center>
+    <form action="/new-user" id="regForm" method="POST">
+
+      <input type="text" maxlength="11" placeholder="Rut (12345678-9)" id="rutInp" name="rut" class="form-control mb-3" 
+      value="{{#if valores}}{{valores.rut}}{{/if}}" required/>
+      <input type="text" maxlength="80" placeholder="Nombre y Apellido" id="nameInp" name="username" class="form-control mb-3" 
+      value="{{#if valores}}{{valores.username}}{{/if}}"required/>
+      <input type="text" maxlength="80" placeholder="Correo Electrónico" id="emailInp" name="email" class="form-control mb-3" 
+      value="{{#if valores}}{{valores.email}}{{/if}}"required/>
+
+      <!--AREAS-->
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="areaInp" required>Área</label>
+        </div>
+        <select type="text" class="custom-select" id="areaInp" name="area" required>
+        <option value="" disabled selected>Seleccionar...</option>
+        {{#each areas}} 
+        <option value ="{{nombre}}">{{nombre}}</option>
+        {{/each}}
+        </select>
+      </div>
+
+      <!--AREA SI ES GERENCIA-->
+      <div id="subareas" class="input-group mb-3 displayNone">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="subareaInp">De</label>
+        </div>
+        <select type="text" class="custom-select" id="subareaInp" name="subarea">
+        {{#each subareas}}
+        <option value ="{{nombre}}">{{nombre}}</option>
+        {{/each}}
+        </select>
+      </div>
+
+
+      <input maxlength="40" type="password" placeholder="Contraseña" id="passInp" name="password" class="form-control mb-3" required/>
+      <input maxlength="40" type="password" placeholder="Validar Contraseña" id="passInp2" name="password2" class="form-control mb-3" required/>
+
+      <button type="submit" id="submitInp" class="btn btn-grey mb-3 btn-block">Crear</button>
+    </form>
+    <a href="ingresar" class="badge badge-secondary py-1 w-100">¿Ya tienes una cuenta?</a>
+  </div>
+</div>
+
+<a>
+  <!-- Copyright -->
+<div class="text-black text-center displayNone" style="background-color: #fff;">
+    <img src="/img/logofooter.png" width="80" height="67" class="img-fluid" alt="Responsive image" />
+  <!-- Copyright -->
+</div>
+</a>
+
+<!--END-FORM-->
+<footer class="navbar-fixed-bottom navbar-expand-lg nav-bar footer">
+    <!-- Copyright -->
+    <div class="text-white p-3" style="background-color: #475867;font-size: 14px;">
+        Caimi ® Regsol 2022
+    </div>
+</footer>

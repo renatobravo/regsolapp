@@ -1,0 +1,348 @@
+<!--DATASERVICE-->
+<input id="abiertaSTDEmitida" class="displayNone" value="{{#each SolRegEmitida}}{{inpEstadoSol}} {{/each}}">
+<input id="abiertaSTDRecibida" class="displayNone" value="{{#each SolRegRecibida}}{{inpEstadoSol}} {{/each}}">
+<input id="procesoSTDEmiRec" class="displayNone" value="{{#each soluserEmiRepVN}}{{inpEstadoSol}} {{/each}}">
+<input id="completadaSTDEmiRec" class="displayNone" value="{{soluserEmiRepComple}}">
+<input id="vencenSTDRec" class="displayNone" value="{{solVenRecM}}">
+
+<!--NAVBAR-->
+<nav class="navbar navbar-expand-lg navbar-dark nav-bar">
+  <a class="navbar-brand" href="/">
+    <img src="../img/regsol.png" width="180" height="65" />
+  </a>
+
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#" onclick="inicioID();">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="regID();">Registrar</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="gesID();">Gestionar</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#" onclick="infoID();">Informe</a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto"></ul>
+    <form class="form-inline my-2 my-lg-0">
+      <ul class="navbar-nav mr-auto">
+
+        <div class="containerProfile">
+            <img class="profileIMG" src="/img/user_bg.png" />
+            <div id="userProfile" class="centered"></div>
+        </div>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="userlink" role="button" data-toggle="dropdown"
+            aria-expanded="false">
+            Usuario
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" href="#" onclick="perfilID();">Perfil</a>
+          </div>
+        </li>
+
+        <li class="nav-item mx-1">
+          <a id="signoutlink" class="nav-link" href="">Cerrar Sesión</a>
+        </li>
+      </ul>
+    </form>
+  </div>
+  </div>
+</nav>
+
+<!-- MODAL AYUDA -->
+<div class="modal fade" id="ayudaModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gridModalLabel">Ayuda en el Inicio</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid bd-example-row">
+                    <p class="row text-justify font-weight-light">
+                        {{AyudaInicio}}
+                    </p>
+                    <br>
+                    <div class="row float-right">
+                        <a class="navbar-brand">
+                            <img src="/img/regsol.png" width="140px" height="50,5px" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--INICIO AREA 1-->
+<div class="rowregsol mb-3">
+  <div class="mt-3 ml-3 areaform">
+    <a type="button" id="btnAyudaSol" class="btn btn-primary ml-2 float-right" data-toggle="modal"
+      data-target="#ayudaModal" title="Ayuda">
+      <i class="fa fa-question-circle"></i>
+    </a>
+    <div class="row rowges">
+      <p style="color: #ffffff;" class="col-6 mt-2">
+        <b>INICIO</b>&nbsp; <i class="fa fa-chevron-right" aria-hidden="true"></i>&nbsp; SISTEMA DE SOLICITUDES
+      </p>
+    </div>
+
+    <!--INICIO AREA 1 - SOLICITUDES VENCIDAS-->
+    <div class="row rowges">
+
+      <!--INICIO AREA 1 - SOLICITUDES RECIBIDAS-->
+      <div class="col-md-4 areaforminicio">
+        <p class="mt-2" style="color:#475867"><b>ABIERTAS RECIBIDAS </b><i class="fa fa-angle-double-left"
+            style="color: #d41b3b;"></i></p>
+            <hr>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar-ini">
+          <table id="soltable_ER" class="table table-sm table-condensed tableFixHead">
+            <thead style="background-color:rgb(255, 255, 255)">
+              <tr>
+                {{#if SolRegRecibida}}
+                <th class="col-xs-1" style="font-size: 12px;">ID</th>
+                <th class="col-xs-2" style="font-size: 12px;">TIPO</th>
+                <th class="col-xs-2" style="font-size: 12px;">DE</th>
+                <th class="col-xs-2" style="font-size: 12px;" title="Autorización"><i class="fa fa-handshake-o"></i>
+                </th>
+                <th class="col-xs-2" style="font-size: 12px;" title="Prioridad"><i class="fa fa-product-hunt"></i></th>
+                {{/if}}
+              </tr>
+            </thead>
+            {{#each SolRegRecibida}}
+            <tbody>
+              <tr class="clickableRow">
+                <td class="col-xs-2" style="font-size: 11px;">{{inpIDSol}}</td>
+                <td class="col-xs-2" style="font-size: 12px;">{{inpTipoSol}}</td>
+                <td class="col-xs-2" style="font-size: 12px;">{{inpEmailSol}}</td>
+                {{#if AutResponse}}
+                <td class="col-xs-2" style="font-size: 12px;"><i class="fa fa-pencil"></td>
+                {{else}}
+                {{#if inpAutEmailSol}}
+                <td class="col-xs-2" style="font-size: 12px;"><i class="fa fa-user"></td>
+                {{else}}
+                <td class="col-xs-2" style="font-size: 12px;"></td>
+                {{/if}}
+                {{/if}}
+
+                <td class="col-xs-2">
+                  <img id="IMGpriori" src="{{imgPrioriSrc}}" width="15" height="15" class="mb-2" />
+                  <input id="inpPrioridadSol" value="{{inpPrioridadSol}}" style="display: none;">
+                </td>
+
+              </tr>
+            </tbody>
+            {{/each}}
+          </table>
+        </div>
+      </div>
+      
+      <div class="col-md-4 areaforminicio">
+        <p class="mt-2" style="color:#475867;"><b>EN PROCESO</b>&nbsp;<i class="fa fa-cogs" style="color: #d41b3b;"></i>
+        </p>
+        <hr>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar-ini mb-2">
+          <table id="soltable_NEW" class="table table-sm table-condensed tableFixHead">
+            <thead style="background-color:rgb(255, 255, 255)">
+              <tr>
+                {{#if soluserEmiRepVN}}
+                <th class="col-xs-2" style="font-size: 12px;">ID</th>
+                <th class="col-xs-2" style="font-size: 12px;">TIPO</th>
+                <th class="col-xs-2" style="font-size: 12px;">NECESARIA</th>
+                <th class="col-xs-2" style="font-size: 12px;" title="Vencimiento"><i class="fa fa-calendar"></i></th>
+                <th class="col-xs-2" style="font-size: 12px;" title="Emitida/Recibida"><i class="fa fa-retweet"></i>
+                </th>
+                <th class="col-xs-2" style="font-size: 12px;" title="Prioridad"><i class="fa fa-product-hunt"></i></th>
+                {{/if}}
+              </tr>
+            </thead>
+            {{#each soluserEmiRepVN}}
+            <tbody>
+              <tr class="clickableRow">
+                <td class="col-xs-1" style="font-size: 11px;">{{inpIDSol}}</td>
+                <td class="col-xs-2" style="font-size: 12px;">{{inpTipoSol}}</td>
+                <td class="col-xs-2" style="font-size: 12px;">{{inpFchNecesariaSol}}</td>
+
+                <td class="col-xs-2">
+                  {{#if FchNormal}}
+                  <i title="Normal" id="iconVenOk" class="fa fa-calendar-check-o"
+                    style="color: #50b34d;font-size: 12px;"></i>
+                  {{else}}
+                  {{#if inpFchNecesariaSol}}
+                  <i title="Vencida" id="iconVen" class="fa fa-calendar-times-o"
+                    style="color: #d41b3b;font-size: 12px;"></i>
+                  {{else}}
+                  <i title="Normal" id="iconVenOk" class="fa fa-calendar-check-o"
+                    style="color: #50b34d;font-size: 12px;"></i>
+                  {{/if}}
+                  {{/if}}
+                </td>
+
+                <td class="col-xs-2">
+                  <span id="spanCatSol" style="font-size: 12px;"><b>{{catSol}}</b></span>
+                </td>
+
+                <td class="col-xs-2">
+                  <img id="IMGpriori" src="{{imgPrioriSrc}}" width="14" height="14" />
+                  <input id="inpPrioridadSol" value="{{inpPrioridadSol}}" style="display: none;">
+                </td>
+              </tr>
+            </tbody>
+            {{/each}}
+          </table>
+        </div>
+      </div>
+
+      <!--INICIO AREA 1 - SOLICITUDES EMITIDAS-->
+      <div class="col-md-4 areaforminicio">
+        <p class="mt-2" style="color:#475867"><b>ABIERTAS EMITIDAS </b><i class="fa fa-angle-double-right"
+            style="color: #d41b3b;"></i></p>
+            <hr>
+        <div class="table-wrapper-scroll-y my-custom-scrollbar-ini">
+          <table id="soltable_ER" class="table table-sm table-condensed tableFixHead">
+            <thead style="background-color:rgb(255, 255, 255)">
+              <tr>
+                {{#if SolRegEmitida}}
+                <th class="col-xs-1" style="font-size: 12px;">ID</th>
+                <th class="col-xs-1" style="font-size: 12px;">TIPO</th>
+                <th class="col-xs-1" style="font-size: 12px;">PARA</th>
+                <th class="col-xs-1" style="font-size: 12px;" title="Autorización"><i class="fa fa-handshake-o"></i>
+                </th>
+                <th class="col-xs-1" style="font-size: 12px;" title="Prioridad"><i class="fa fa-product-hunt"></i></th>
+                {{/if}}
+              </tr>
+            </thead>
+            {{#each SolRegEmitida}}
+            <tbody>
+              <tr class="clickableRow">
+                <td class="col-xs-1" style="font-size: 11px;">{{inpIDSol}}</td>
+                <td class="col-xs-1" style="font-size: 12px;">{{inpTipoSol}}</td>
+                <td class="col-xs-1" style="font-size: 12px;">{{inpNomRecepSol}}</td>
+
+                {{#if AutResponse}}
+                <td class="col-xs-2" style="font-size: 12px;"><i class="fa fa-pencil"></td>
+                {{else}}
+                {{#if inpAutEmailSol}}
+                <td class="col-xs-2" style="font-size: 12px;"><i class="fa fa-user"></td>
+                {{else}}
+                <td class="col-xs-2" style="font-size: 12px;"></td>
+                {{/if}}
+                {{/if}}
+
+                <td class="col-xs-2">
+                  <img id="IMGpriori" src="{{imgPrioriSrc}}" width="14" height="14" class="mb-2" />
+                  <input id="inpPrioridadSol" value="{{inpPrioridadSol}}" style="display: none;">
+                </td>
+              </tr>
+            </tbody>
+            {{/each}}
+          </table>
+        </div>
+      </div>
+
+      
+
+      <div class="col-md-3 areaforminicio">
+
+        <div class="text-center">
+          <p style="color: #475867;" class="mt-2">
+            <b>VENCEN ESTE MES </b>
+          </p>
+          <hr>
+        </div>
+
+        <div class="mb-3">
+          <div class="counter-box" style="background-color:#f0f0f0; box-shadow: 0 2px 2px rgba(36,37,39,.14),0 2px 2px rgba(36,37,39,.08);">
+            <i class="fa fa-clock-o"></i>
+            <span id="spnVencer" class="counter"></span>
+            <p>Solicitudes</p>
+          </div>
+        </div>
+
+      </div>
+
+
+      <div class="col-md-7 areaforminicio">
+        <div class="text-center">
+          <p style="color: #475867;" class="mt-2">
+            <b>ESTADÍSTICA ÚLTIMOS 3 MESES </b>
+            <hr>
+          </p>
+        </div>
+        <div class="row">
+          <div class="col-md-4 mb-3">
+            <div class="counter-box"
+              style="background-color:#f0f0f0; box-shadow: 0 2px 2px rgba(36,37,39,.14),0 2px 2px rgba(36,37,39,.08);">
+              <i class="fa fa-folder-open-o"></i>
+              <span id="spnAbierta" class="counter"></span>
+              <p>Abiertas</p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="counter-box"
+              style="background-color:#f0f0f0; box-shadow: 0 2px 2px rgba(36,37,39,.14),0 2px 2px rgba(36,37,39,.08);">
+              <i class="fa fa-cogs"></i>
+              <span id="spnProceso" class="counter"></span>
+              <p>Proceso</p>
+            </div>
+          </div>
+          <div class="col-md-4 mb-3">
+            <div class="counter-box"
+              style="background-color:#f0f0f0; box-shadow: 0 2px 2px rgba(36,37,39,.14),0 2px 2px rgba(36,37,39,.08);">
+              <i class="fa fa-check-square-o"></i>
+              <span id="spnCompletada" class="counter"></span>
+              <p>Completadas</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-2 areaforminicio">
+        <div class="mb-3 mt-3">
+              <div class="date mx-auto" style="box-shadow: 0 2px 2px rgba(36,37,39,.14),0 2px 2px rgba(36,37,39,.08);"></div>
+        </div>
+      </div>
+
+
+    </div>
+  </div>
+</div>
+
+
+<!--SCRIPTS-->
+<script type="module" src="../js/home.js"></script>
+
+<script>
+  const firebase = sessionStorage.getItem("user");
+  const userlog = (JSON.parse(firebase));
+  const uid = userlog.uid;
+  
+  function infoID() {
+    window.location.href = "/info/" + uid;
+  }
+  function perfilID() {
+    window.location.href = "/perfil/" + uid;
+  }
+  function regID() {
+    window.location.href = "/reg/" + uid + "/" + "data";
+  }
+  function gesID() {
+    window.location.href = "/ges/" + uid + "/" + "data";
+  }
+  function inicioID() {
+    window.location.href = "/inicio/" + uid;
+  }
+</script>

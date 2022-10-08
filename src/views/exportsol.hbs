@@ -1,0 +1,231 @@
+<div id="printableArea">
+	{{#each exportSolicitud}}
+	<div class="rowregsol">
+		<div class="mt-3 ml-3 areaform5">
+			<div class="form-row">
+
+				<div class="col-md-4 mt-3 mb-3">
+					<a>
+						<img src="/img/regsol.png" width="180" height="65" />
+					</a>
+				</div>
+
+				<div class="col-md-4 mt-3 float-center" align="center">
+					<h3><b>Solicitud ID {{inpIDSol}}</b>
+						<h6>Estado: <b>{{inpEstadoSol}}</b></h6>
+					</h3>
+				</div>
+
+				<div class="col-md-4 mt-3" align="right">
+					<h6>Fecha Solicitud: {{inpFechaSol}}</h6>
+					<h6>Fecha Necesaria: {{inpFchNecesariaSol}}</h6>
+				</div>
+
+			</div>
+		</div>
+	</div>
+	<hr>
+	<div class="rowregsol">
+		<div class="mt-3 ml-3 areaform">
+			<div class="form-row">
+
+				<div class="form-group col-md-3">
+					<label for="inpTipoSolDet">Tipo Solicitud:</label>
+					<input type="text" class="form-control" id="inpTipoSolDet" name="inpTipoSolDet"
+						value="{{inpTipoSol}}" readonly>
+				</div>
+				<div class="form-group col-md-3">
+					<label for="inpSolicitante">Solicitante:</label>
+					<input type="text" id="inpSolicitante" name="inpSolicitante" class="form-control"
+						value="{{inpNomSol}}" readonly>
+				</div>
+				<div class="form-group col-md-3">
+					<label for="inpTipoSoldet">Dirigido a:</label>
+					<input type="text" class="form-control" id="inpNomRecepSolDet" name="inpNomRecepSolDet"
+						value="{{inpNomRecepSol}}" readonly>
+				</div>
+				<div class="form-group col-md-3">
+					<label for="inpPrioridad">Prioridad:</label>
+					<input type="text" class="form-control" id="inpPrioridad" name="inpPrioridad"
+						value="{{inpPrioridadSol}}" readonly>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="rowregsol">
+		<div class="mt-3 ml-3 areaform">
+			<div class="form-row">
+
+				<div class="form-group col-md-4">
+					<label for="inpAsunSol" class="col-10">Asunto Solicitud</label>
+					<input minlength="2" maxlength="41" type="text" class="form-control" id="inpAsunSol"
+						name="inpAsunSol" value="{{inpAsunSol}}" readonly>
+				</div>
+				<div class="form-group col-md-4">
+					<label for="inpAutEmailSol" class="col-12">Necesita Autorizar:</label>
+					<input type="text" class="form-control" id="inpAutEmailSol" name="inpAutEmailSol"
+						value="{{inpAutEmailSol}}" readonly>
+				</div>
+				<div class="col-md-4 form-group">
+					<label for="inpAutResponse" class="col-12">Respuesta Autorización:</label>
+					<input type="text" class="form-control" id="inpAutResponse" name="inpAutResponse"
+						value="{{AutResponse}}" readonly>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="rowregsol">
+		<div class="mt-3 ml-3 areaform">
+			<div class="form-row">
+
+				<div class="form-group col-md-10">
+					<label for="inpDetalleSoldet">Detalle:</label>
+					<textarea id="inpDetalleSoldet" class="form-control" name="inpDetalleSoldet"
+						disabled>{{inpDetalleSol}}</textarea>
+				</div>
+				<div class="form-group col-md-2">
+					<label for="viewFileDet">Archivo Cargado:</label>
+					{{#if inpUrlFile}}
+					<br>
+					<a id="viewFileDet" class="btn btn-dark1 text-white ml-3" title="Ver Archivo" target="_blank"
+						href="{{inpUrlFile}}">
+						<i class="fa fa-file-text-o"></i><span style="font-size: 11px;">
+							&nbsp;Abrir</span></a>
+					{{else}}
+					<br>
+					<a id="viewFileDet" class="btn btn-dark1 text-white ml-3" title="Ver Archivo" disabled>
+						<i class="fa fa-file-o"></i><span style="font-size: 11px;">
+							&nbsp;Vacío</span></a>
+					{{/if}}
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	{{#if inpDescProdSol0}}
+	<div class="rowregsol">
+		<div class="mt-3 ml-3 areaform">
+			<div class="form-row">
+				<table id="myTable" class="form-group">
+					<tbody>
+						{{#if inpDescProdSol0}}
+						<!--ROW0-->
+						<tr class="form-row formcompra">
+							<td class="col-md-7 ml-1">
+								<label for="inpDescProdSol0det">Descripción:</label>
+								<input type="text" id="inpDescProdSol0det" class="form-control"
+									value="{{inpDescProdSol0}}" name="inpDescProdSol0det" disabled>
+							</td>
+							<td class="col-md-2">
+								<label for="inpCantProdSol0det">Cantidad:</label>
+								<input type="number" id="inpCantProdSol0det" name="inpCantProdSol0det"
+									value="{{inpCantProdSol0}}" class="form-control" disabled>
+							</td>
+							<td class="col-md-2">
+								<label for="inpUndMedSol0det">U.Medida:</label>
+								<input class="form-control" id="inpUndMedSol0det" name="inpUndMedSol0det"
+									value="{{inpUndMedSol0}}" disabled>
+							</td>
+						</tr>
+						{{/if}}
+
+						{{#if AddDescProdSol0}}
+						<!--ADDROW0-->
+						<tr class="form-row formcompra">
+							<td class="col-md-7 mt-1 ml-1">
+								<input type="text" id="AddDescProdSol0" class="form-control" value="{{AddDescProdSol0}}"
+									name="AddDescProdSol0" disabled>
+							</td>
+							<td class="col-md-2 mt-1">
+								<input type="number" id="AddCantProdSol0" name="AddCantProdSol0"
+									value="{{AddCantProdSol0}}" class="form-control" disabled>
+							</td>
+							<td class="col-md-2 mt-1">
+								<input class="form-control" id="AddUndMedSol0" name="AddUndMedSol0"
+									value="{{AddUndMedSol0}}" disabled>
+							</td>
+							{{/if}}
+
+							{{#if AddDescProdSol1}}
+							<!--ADDROW1-->
+						<tr class="form-row formcompra">
+							<td class="col-md-7 mt-1 ml-1">
+								<input type="text" id="AddDescProdSol1det" class="form-control"
+									value="{{AddDescProdSol1}}" name="AddDescProdSol1det" disabled>
+							</td>
+							<td class="col-md-2 mt-1">
+								<input type="number" id="AddCantProdSol1" name="AddCantProdSol1"
+									value="{{AddCantProdSol1}}" class="form-control" disabled>
+							</td>
+							<td class="col-md-2 mt-1">
+								<input class="form-control" id="AddUndMedSol1" name="AddUndMedSol1"
+									value="{{AddUndMedSol1}}" disabled>
+							</td>
+							{{/if}}
+
+							{{#if AddDescProdSol2}}
+							<!--ADDROW2-->
+						<tr class="form-row formcompra">
+							<td class="col-md-7 mt-1 ml-1">
+								<input type="text" id="AddDescProdSol2" class="form-control" value="{{AddDescProdSol2}}"
+									name="AddDescProdSol2" disabled>
+							</td>
+							<td class="col-md-2 mt-1">
+								<input type="number" id="AddCantProdSol2" name="AddCantProdSol2"
+									value="{{AddCantProdSol2}}" class="form-control" disabled>
+							</td>
+							<td class="col-md-2 mt-1">
+								<input class="form-control" id="AddUndMedSol2" name="AddUndMedSol2"
+									value="{{AddUndMedSol2}}" disabled>
+							</td>
+							{{/if}}
+
+							{{#if AddDescProdSol3}}
+							<!--ADDROW3-->
+						<tr class="form-row formcompra">
+							<td class="col-md-7 mt-1 ml-1">
+								<input type="text" id="AddDescProdSol3" class="form-control" value="{{AddDescProdSol3}}"
+									name="AddDescProdSol3" disabled>
+							</td>
+							<td class="col-md-2 mt-1">
+								<input type="number" id="AddCantProdSol3" name="AddCantProdSol3"
+									value="{{AddCantProdSol3}}" class="form-control" disabled>
+							</td>
+							<td class="col-md-2 mt-1">
+								<input class="form-control" id="AddUndMedSol3" name="AddUndMedSol3"
+									value="{{AddUndMedSol3}}" disabled>
+							</td>
+							{{/if}}
+					</tbody>
+				</table>
+			</div>
+
+		</div>
+	</div>
+</div>
+{{/if}}
+
+<div align="center" class="mt-4" style="font-size: 14px;">Emitido por Regsol para CAIMI ®</div>
+
+<div class="no-print ">
+	<a type="buttom" href="#" onclick="printDiv('printableArea')" class="printIcon btn-primary">
+		<i class="fa fa-print my-float no-print"></i>
+	</a>
+</div>
+
+{{/each}}
+
+<script>
+	function printDiv(divName) {
+		var printContents = document.getElementById(divName).innerHTML;
+		var originalContents = document.body.innerHTML;
+		document.body.innerHTML = printContents;
+		window.print();
+		document.body.innerHTML = originalContents;
+	}
+</script>

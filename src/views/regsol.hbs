@@ -1,0 +1,368 @@
+<!--NAVBAR-->
+<nav class="navbar navbar-expand-lg navbar-dark nav-bar">
+    <a class="navbar-brand" href="/">
+        <img src="/img/regsol.png" width="180" height="65" />
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="inicioID();">Inicio</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#" onclick="regID();">Registrar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="gesID();">Gestionar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="infoID();">Informe</a>
+            </li>
+        </ul>
+  </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto"></ul>
+        <form class="form-inline my-2 my-lg-0">
+            <ul class="navbar-nav mr-auto">
+                        <div class="containerProfile">
+            <img class="profileIMG" src="/img/user_bg.png" />
+            <div id="userProfile" class="centered"></div>
+        </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userlink" role="button" data-toggle="dropdown">
+                        Usuario
+                    </a>
+                    <div class="dropdown-menu">
+                                   <a class="dropdown-item" href="#" onclick="perfilID();">Perfil</a>
+                    </div>
+                </li>
+                <li class="nav-item mx-1">
+                    <a id="signoutlink" class="nav-link" href="">Cerrar Sesión</a>
+                </li>
+            </ul>
+        </form>
+    </div>
+    </div>
+</nav>
+
+<!--FORM-START-->
+<form action="/new-request" name="solForm" id="solForm" method="POST">
+
+    <!--DATA USER SERVICE-->
+    <input type="text" style="display: none;" class="form-control" id="inpIDuser" name="inpIDuser" 
+    value="{{idUser}}">
+    <input type="text" style="display: none;" id="inpEmailuser" name="inpEmailuser">
+    <input type="text" style="display: none;" id="inpUIDuser" name="inpUIDuser">
+    <input type="text" style="display: none;" id="inpDirFile" name="inpDirFile">
+    <input type="text" style="display: none;" id="inpUrlFile" name="inpUrlFile">
+
+    <!--DIV-AREA 1-->
+    <div class="rowregsol">
+
+        <div class="mt-3 ml-3 areaform">
+
+            <a type="button" id="btnAyudaSol" class="btn btn-primary ml-2 float-right" data-toggle="modal"
+                data-target="#ayudaModal">
+                <i class="fa fa-question-circle"></i>
+            </a>
+
+            <p style="color: #ffffff;" class="col-6 mt-2">
+                <b>REGISTRO DE SOLICITUDES</b>&nbsp; <i class="fa fa-chevron-right" aria-hidden="true"></i> CREAR
+            </p>
+
+            <hr class="hr">
+
+            <div class="form-row">
+                <div class="form-group col-md-1">
+                    <label for="inpIDSol" class="col-6">*iD</label>
+                    <input style="color:#949ba5;" type="text" class="form-control" id="inpIDSol" name="inpIDSol" {{#each
+                        PreIdSol}}value="{{idsolicitud}}" {{/each}}required readonly>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="inpEstadoSol" class="col-6">*Estado</label>
+                    <input type="text" class="form-control" id="inpEstadoSol" name="inpEstadoSol" placeholder="-"
+                        style="color:green;" required readonly>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="inpNomSol" class="col-6">*Solicitante</label>
+                    <input type="text" class="form-control" id="inpNomSol" name="inpNomSol" style="color:#949ba5;" 
+                    value="{{nameUser}}" readonly>
+                </div>
+
+                <div class="form-group col-md-2">
+                    <label for="inpFechaSol" class="col-10">*Fecha Solicitud</label>
+                    <input type="date" id="inpFechaSol" name="inpFechaSol" class="form-control" required
+                        readonly>
+                </div>
+
+                <div class="form-group col-md-2 float-right">
+                    <label for="inpFchNecesariaSol" class="col-10">Fecha Necesaria</label>
+                    <input type="date" id="inpFchNecesariaSol" name="inpFchNecesariaSol" class="form-control datepicker">
+                </div>
+
+                <div class="form-group col-md-2 float-right">
+                    <label for="inpPrioridadSol" class="col-10"><img src="/img/prioridad.png" width="44" height="17"/>&nbsp;Prioridad:</label>
+                    <select type="text" class="form-control" id="inpPrioridadSol" name="inpPrioridadSol">
+                        <option value="Baja" selected>Baja</option>
+                        {{#each prioridad}}
+                        <option value="{{nombre}}">{{nombre}}</option>
+                        {{/each}}
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+   <!-- MODAL AYUDA -->
+    <div class="modal fade" id="ayudaModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="gridModalLabel">Ayuda sobre el Registro</h5>
+                    <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container-fluid bd-example-row">
+                        <p class="row text-justify font-weight-light">
+                        {{AyudaNewReg}}
+                        </p>
+                        <br>
+                        <div class="row float-right">
+                            <a class="navbar-brand">
+                            <img src="/img/regsol.png" width="140px" height="50,5px" />
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--DIV-AREA 2-->
+    <div class="mt-3 ml-3  areaform">
+        <div class="form-row">
+
+            <div class="form-group col-md-2">
+                <label for="inpTipoSol" class="col-10">*Tipo Solicitud:</label>
+                <select type="text" class="form-control" id="inpTipoSol" name="inpTipoSol" required>
+                    <option value="" disabled selected>Seleccionar...</option>
+                    {{#each tiposol}}
+                    <option value="{{nombre}}">{{nombre}}</option>
+                    {{/each}}
+                </select>
+            </div>
+
+            <div class="form-group col-md-4">
+                <label for="inpAsunSol" class="col-10">*Asunto Solicitud</label>
+                <input minlength="2" maxlength="41" type="text" class="form-control" id="inpAsunSol" name="inpAsunSol" placeholder=".." required>
+            </div>
+
+            <div class="form-group col-md-3">
+                <label for="inpNomRecepSol" class="col-10">*Dirigido a:</label>
+                <input type="datalist" minlength="8" maxlength="80" list="receptores" placeholder="Receptor"
+                    class="form-control custom-select" id="inpNomRecepSol" name="inpNomRecepSol" required>
+                <datalist id="receptores">
+                    {{#each dirigido}}
+                    <option value="{{email}}">{{nombre}}</option>
+                    {{/each}}
+                </datalist>
+            </div>
+
+            <div class="form-group col-md-2">
+                <label for="inpAutEmailSol" class="col-12">Necesita Autorizar:</label>
+                <select type="text" class="form-control" id="inpAutEmailSol" name="inpAutEmailSol">
+                    <option value="" disabled selected>Seleccionar...</option>
+                    {{#each autoriza}}
+                    <option value="{{email}}">{{nombre}}</option>
+                    {{/each}}
+                </select>
+            </div>
+
+        </div>
+    </div>
+
+    <!--DIV-DETALLE SOLICITUD-->
+    <div class="mt-3 ml-3 pb-3 pb-1 areaform">
+        <div class="form-row">
+
+            <div class="form-group col-md-7">
+                <label for="inpDetalleSol" id="charNum" class="col-10">*Detalle (Max. 500 Caracteres):</label>
+                <textarea minlength="5" maxlength="501" id="inpDetalleSol" class="form-control" name="inpDetalleSol" placeholder=".."
+                    onkeyup="countChars(this);" required></textarea>
+            </div>
+
+            <div class="form-group">
+                <label class="ml-1 col-12" style="font-size: 11px;" for="fileButton">Max.10MB (.jpg .png .doc .xls .ppt
+                    .pdf .rar)</label>
+                <br>
+                <input type="file" class="btn btn-dark1 text-white ml-1" id="fileButton" title="Adjuntar Archivo" style="font-size: 10px;" name="fileButton"
+                    accept=".jpg, .jpeg, .png, .gif, .bmp, .txt, .doc, .docx, .xls, .xlsx, .ppt, .pptx, .pdf, .zip, .rar">
+                </input>
+                <div class="progress ml-1">
+                    <div style="font-size: 10px;" id="uploadProgress" class="progress-bar bg-danger" role="progressbar" 
+                    style="width:0%">
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <br>
+                <button type="button" id="fileDelete" class="btn btn-dark1 text-white ml-2 mt-2" title="Borrar Archivo"
+                    disabled>
+                    <i class="fa fa-trash"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!--FORM-AREA COMPRAS ADD-->
+    <div class="mt-3 ml-3 pb-1 areaform">
+        <table id="myTable" class="form-group">
+            <tbody>
+
+                <!--ROW0-->
+
+                <tr class="form-row formcompra">
+                    <td class="col-md-8">
+                        <input minlength="2" maxlength="80" type="text" id="inpDescProdSol0" class="form-control"
+                            name="inpDescProdSol0" placeholder="Producto o Descripción (Max. 80 Caracteres)" />
+                    </td>
+
+                    <td class="col-md-2">
+                        <input type="number" id="inpCantProdSol0" minlength="1" maxlength="12" name="inpCantProdSol0"
+                            class="form-control" placeholder="Cantidad" disabled />
+                    </td>
+
+                    <td class="col-md-1">
+                        <select class="custom-select form-control" id="inpUndMedSol0" name="inpUndMedSol0" disabled>
+                            <option selected disabled>U.M.</option>
+                            {{#each umedida}}
+                            <option value="{{nombre}}">{{nombre}}</option>
+                            {{/each}}
+                        </select>
+                    </td>
+
+                    <td class="pl-1">
+                        <button type="button" class="btn btn-dark1 text-white" id="addrow" value="Add Row"
+                            title="Añadir Fila" disabled>
+                            <i class="fa fa-plus-square"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+
+        </table>
+    </div>
+
+    <!--SUBMIT-->
+    <div class="rowreg areaformtrans ml-0">
+        <div class="col-md-4">
+            <button type="submit" id="btnGuardarSol" class="btn btn-primary float-left">
+                <i class="fa fa-floppy-o"></i>&nbsp; Guardar
+            </button>
+            <button type="button" id="btnCancelSol" class="btn btn-primary ml-3 float-left">
+                <i class="fa fa-times-circle-o"></i>&nbsp; Cancelar
+            </button>
+        </div>
+    </div>
+
+</form>
+
+<!--SCRIPTS-->
+<script type="module" src="/./js/regsol.js"></script>
+
+<script>
+
+    $(document).ready(function () {
+        var counter = 0;
+        $("#addrow").on("click", function () {
+            var newRow = $("<tr class='form-row formcompra'>");
+            var cols = "";
+            if (counter <= 3) {
+                cols +=
+                    '<td class="col-md-8 mt-1"><input maxlength="80" placeholder="Producto o Descripción (Max. 80 Caracteres)" type="text" class="form-control" id="AddDescProdSol' + counter + '" name="AddDescProdSol' + counter + '"/></td>';
+                cols +=
+                    '<td class="col-md-2 mt-1"><input maxlength="12" placeholder="Cantidad" type="number" class="form-control" id="AddCantProdSol' +
+                    counter +
+                    '" name="AddCantProdSol' +
+                    counter +
+                    '"/></td>';
+                cols +=
+                    '<td class="col-md-1 mt-1"><select class="custom-select form-control" id="AddUndMedSol' +
+                    counter +
+                    '" name="AddUndMedSol' +
+                    counter +
+                    '"><option selected disabled>U.M.</option>{{#each umedida}}<option value ="{{nombre}}">{{nombre}}</option>{{/each}}</select></td>';
+                cols +=
+                    '<td class="col-md-0 mt-1 mr-1"><a type="submit" id="newreg" class="ibtnDel btn btn-md btn-danger"><i class="fa fa-trash"></i></a></td>';
+
+                newRow.append(cols);
+                $("table.form-group").append(newRow);
+                counter++;
+            } else {
+                swal("Información", "Solo se pueden agregar hasta un máximo de 5 filas, adjunte un archivo con el detalle si lo necesita.", "info")
+            }
+        });
+        $("table.form-group").on("click", ".ibtnDel", function (event) {
+            $(this).closest("tr").remove();
+            counter -= 1;
+        });
+    });
+
+    //DESCRIP CHARS
+    function countChars(obj) {
+        var maxLength = 500;
+        var strLength = obj.value.length;
+        if (strLength > maxLength) {
+            document.getElementById("charNum").innerHTML = '<span style="color: red;">*Detalle (' + strLength + ' de ' + maxLength + ' Caracteres ):</span>';
+        } else {
+            document.getElementById("charNum").innerHTML = '*Detalle (' + strLength + ' de ' + maxLength + ' Caracteres ):';
+        }
+    }
+
+    //DATE FILTER
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#inpFchNecesariaSol').attr('min', today);
+
+    //ADD DISABLED
+    $("#inpDescProdSol0").on("change", function () {
+        inpCantProdSol0.disabled = false;
+    })
+    $("#inpCantProdSol0").on("change", function () {
+        inpUndMedSol0.disabled = false;
+    })
+    $("#inpUndMedSol0").on("change", function () {
+        addrow.disabled = false;
+    })
+
+    //REG+ID
+  const firebase = sessionStorage.getItem("user");
+  const userlog = (JSON.parse(firebase));
+  const uid = userlog.uid;
+
+  function perfilID() {
+    window.location.href = "/perfil/" + uid;
+  }
+  function regID() {
+    window.location.href = "/reg/" + uid + "/" + "data";
+  }
+  function gesID() {
+    window.location.href = "/ges/" + uid + "/" + "data";
+  }
+  function inicioID() {
+    window.location.href = "/inicio/" + uid;
+  }
+    function infoID() {
+    window.location.href = "/info/" + uid;
+  }
+</script>

@@ -1,0 +1,21 @@
+<div class="m-0 vh-100 row justify-content-center align-content-center">
+
+    <div class="spinner-grow mr-2 text-secondary" role="status"></div>
+    <div class="spinner-grow text-danger" role="status"></div>
+    <div class="spinner-grow ml-2 text-dark" role="status"></div>
+    <span class="ml-2">Cargando...</span>
+</div>
+
+<script>
+    if (sessionStorage.getItem('user') == null) {
+        
+        window.location.assign("ingresar");
+    }
+    else { 
+
+        var firebase = sessionStorage.getItem("user");
+        var userlog = (JSON.parse(firebase));
+        var uid = userlog.uid;
+        window.location.assign("/inicio/" + uid);
+    }
+</script>

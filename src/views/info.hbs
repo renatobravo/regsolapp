@@ -1,0 +1,220 @@
+<!--NAVBAR-->
+<nav class="navbar navbar-expand-lg navbar-dark nav-bar">
+    <a class="navbar-brand" href="/">
+        <img src="/img/regsol.png" width="180" height="65" />
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="inicioID();">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="regID();">Registrar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="gesID();">Gestionar</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#" onclick="infoID();">Informe</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto"></ul>
+        <form class="form-inline my-2 my-lg-0">
+            <ul class="navbar-nav mr-auto">
+                <div class="containerProfile">
+                    <img class="profileIMG" src="/img/user_bg.png" />
+                    <div id="userProfile" class="centered"></div>
+                </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userlink" role="button" data-toggle="dropdown">
+                        Usuario
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item" href="#" onclick="perfilID();">Perfil</a>
+                    </div>
+                </li>
+                <li class="nav-item mx-1">
+                    <a id="signoutlink" class="nav-link" href="">Cerrar Sesión</a>
+                </li>
+            </ul>
+        </form>
+    </div>
+    </div>
+</nav>
+
+<!-- MODAL AYUDA -->
+<div class="modal fade" id="ayudaModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gridModalLabel">Ayuda en el Registro</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid bd-example-row">
+                    <p class="row text-justify font-weight-light">
+                        {{AyudaInforme}}
+                    </p>
+                    <br>
+                    <div class="row float-right">
+                        <a class="navbar-brand">
+                            <img src="/img/regsol.png" width="140px" height="50,5px" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="/search-request" name="searchForm" id="searchForm" method="POST">
+
+    <!--DATA-SERVICE-->
+    <input type="text" style="display: none;" id="inpUIDuser" name="inpUIDuser" value="{{inpUIDuser}}">
+    {{#each areasUser}}
+    <input type="text" style="display: none;" id="inpEmailUserGes" name="inpEmailUserGes" value="{{email}}">
+    <input type="text" style="display: none;" id="inpArea" name="inpArea" value="{{area}}">
+    <input type="text" style="display: none;" id="inpSubarea" name="inpSubarea" value="{{subarea}}">
+    <input type="text" style="display: none;" id="qryGerenciaVal" name="qryGerenciaVal">
+    <input type="text" style="display: none;" id="verAutorizados" name="verAutorizados">
+
+    {{/each}}
+
+    <!--DIV-AREA 1-->
+    <div class="rowregsol">
+        <div class="mt-3 ml-3 areaform">
+
+            <a type="button" id="btnAyudaSol" class="btn btn-primary ml-2 float-right" data-toggle="modal" title="Ayuda"
+                data-target="#ayudaModal">
+                <i class="fa fa-question-circle"></i>
+            </a>
+
+            <div id="areaSwitch" class="custom-control custom-switch mt-2 mr-2 float-right displayNone">
+                <input type="checkbox" class="custom-control-input" id="customSwitch1" value="qryGerencia">
+                <label class="custom-control-label text-white" for="customSwitch1">Ver {{#each
+                    areasUser}}{{subarea}}{{/each}}</label>
+            </div>
+
+            <p style="color: #ffffff;" class="col-md-6 mt-2">
+                <b>INFORME DE SOLICITUDES</b>
+            </p>
+
+            <div class="rowges">
+                <div class="areaformges form-row">
+
+                    <div class="col-md-2">
+                        <label for="inpEstadoSol" class="col-10">*Estado:</label>
+                        <select type="text" class="form-control" id="inpEstadoSol" name="inpEstadoSol" required>
+                            <option value="Todos" selected>Todos</option>
+                            {{#each estadosol}}
+                            <option value="{{nombre}}">{{nombre}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+
+                    <div class="col-md-2 float-right">
+                        <label for="inpFchDesdeSol" class="col-10">Fecha Desde:</label>
+                        <input type="date" id="inpFchDesdeSol" name="inpFchDesdeSol" class="form-control datepicker">
+                    </div>
+
+                    <div class="col-md-2 float-right">
+                        <label for="inpFchHastaSol" class="col-10">Fecha Hasta:</label>
+                        <input type="date" id="inpFchHastaSol" name="inpFchHastaSol" class="form-control datepicker">
+                    </div>
+
+                    <div id="UserSol" class="col-md-2 displayNone">
+                        <label for="inpUserSol" class="col-10">Usuario:</label>
+                        <input type="datalist" minlength="8" maxlength="80" list="receptores" placeholder="Todos"
+                            class="form-control custom-select" id="inpUserSol" name="inpUserSol">
+                        <datalist id="receptores">
+                            {{#each searchDir}}
+                            <option value="{{email}}">{{nombre}}</option>
+                            {{/each}}
+                        </datalist>
+                    </div>
+
+                    <div id="AutSol" class="ml-4 mt-2 displayNone">
+                        <label for="flexCheckDefault" class="col-10"></label><br>
+                        <input class="form-check-input" type="checkbox" value="verAutorizados" id="flexCheckDefault">
+                        <label class="form-check-label" for="flexCheckDefault" style="font-size: 12px;">
+                            Visualizar<br>Autorizados
+                        </label>
+                    </div>
+
+                    <div class="mt-2 ml-4">
+                        <label for="btnBuscarSol" class="col-6"></label>
+                        <button type="submit" id="btnBuscarSol" class="btn btn-primary"
+                            title="Buscar">Buscar Solicitudes <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+</form>
+
+
+<div class="rowregsol">
+    <div class="mt-3 ml-3 areaform">
+        <p style="color: #ffffff;" class="col-6 mt-2">
+            <b>DETALLE DE SOLICITUDES</b>
+        </p>
+        <div class="rowges">
+            <div class="areaformges">
+                <div class="table-wrapper-scroll-y my-custom-scrollbar-reg table-responsive-sm">
+                    <table class="table table-sm table-condensed tableFixHead">
+                        <thead style="background-color:rgb(255, 255, 255)">
+                            <tr>
+                                <th style="font-size: 12px;" class="col-xs-2">ID</th>
+                                <th style="font-size: 12px;" class="col-xs-2">ESTADO</th>
+                                <th style="font-size: 12px;" class="col-xs-2">TIPO</th>
+                                <th style="font-size: 12px;" class="col-xs-2">FECHA</th>
+                                <th style="font-size: 12px;" class="col-xs-2">PARA</th>
+                                <th style="font-size: 12px;" class="col-xs-2">DE</th>
+                                <th style="font-size: 12px;" class="col-xs-2">ASUNTO</th>
+                            </tr>
+                        </thead>
+    
+                    </table>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+
+
+<!--SCRIPTS-->
+<script type="module" src="/./js/info.js"></script>
+
+<script>
+  const firebase = sessionStorage.getItem("user");
+  const userlog = (JSON.parse(firebase));
+  const uid = userlog.uid;
+  
+  function infoID() {
+    window.location.href = "/info/" + uid;
+  }
+  function perfilID() {
+    window.location.href = "/perfil/" + uid;
+  }
+  function regID() {
+    window.location.href = "/reg/" + uid + "/" + "data";
+  }
+  function gesID() {
+    window.location.href = "/ges/" + uid + "/" + "data";
+  }
+  function inicioID() {
+    window.location.href = "/inicio/" + uid;
+  }
+</script>

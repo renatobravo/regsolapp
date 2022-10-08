@@ -1,0 +1,519 @@
+<!--NAVBAR-->
+<nav class="navbar navbar-expand-lg navbar-dark nav-bar">
+    <a class="navbar-brand" href="/">
+        <img src="/img/regsol.png" width="180" height="65" />
+    </a>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="inicioID();">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="regID();">Registrar</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="#" onclick="gesID();">Gestionar</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#" onclick="infoID();">Informe</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto"></ul>
+        <form class="form-inline my-2 my-lg-0">
+            <ul class="navbar-nav mr-auto">
+            <div class="containerProfile">
+                <img class="profileIMG" src="/img/user_bg.png" />
+                <div id="userProfile" class="centered"></div>
+            </div>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="userlink" role="button" data-toggle="dropdown"
+                        aria-expanded="false">
+                        Usuario
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="#" onclick="perfilID();">Perfil</a>
+                    </div>
+                </li>
+
+                <li class="nav-item mx-1">
+                    <a id="signoutlink" class="nav-link" href="">Cerrar Sesión</a>
+                </li>
+            </ul>
+        </form>
+    </div>
+    </div>
+</nav>
+
+<!-- AUX -->
+<input id="inpCambEstSol_aux" style="display: none;" value="">
+<input id="inpFchMisoCom_aux" style="display: none;" value="{{#each gestData}}{{inpFchMisoCom}}{{/each}}">
+<input id="inpObsComent_aux" style="display: none;" value="{{#each gestData}}{{inpObsComent}}{{/each}}">
+
+
+<!-- MODAL AYUDA -->
+<div class="modal fade" id="ayudaModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="gridModalLabel">Ayuda sobre la Gestión de Solicitud</h5>
+                <button type="button" class="close" data-dismiss="modal"><span>×</span></button>
+            </div>
+            <div class="modal-body">
+                <div class="container-fluid bd-example-row">
+                    <p class="row text-justify font-weight-light">
+                        {{AyudaGestSol}}
+                    </p>
+                    <br>
+                    <div class="row float-right">
+                        <a class="navbar-brand">
+                            <img src="/img/regsol.png" width="140px" height="50,5px" />
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<form action="/req-manage" name="manageForm" id="manageForm" method="POST">
+
+    <!--DATA SERVICE-->
+    <input id="UIDSess" name="UIDSess" style="display: none;" value="{{UIDSess}}">
+    <input id="inpUIDuser" name="inpUIDuser" style="display: none;"
+        value="{{#each idSolicitud}}{{inpUIDuser}}{{/each}}">
+    <input id="inpIDSolCom" name="inpIDSolCom" style="display: none;"
+        value="{{#each idSolicitud}}{{inpIDSol}}{{/each}}">
+    <input id="inpEmailSol" name="inpEmailSol" style="display: none;"
+        value="{{#each idSolicitud}}{{inpEmailSol}}{{/each}}">
+    <input id="inpUIDSolCom" name="inpUIDSolCom" style="display: none;" value="{{inpUIDSolCom}}">
+    <input id="inpCantRow" name="inpCantRow" style="display: none;">
+    <input id="inpCharuser" name="inpCharuser" style="display: none;">
+    <input id="inpNamUserCom" name="inpNamUserCom" style="display: none;">
+    <input id="inpFchComent" name="inpFchComent" style="display: none;">
+    <input id="inpEmailuser" name="inpEmailuser" style="display: none;"
+        value="{{#each idSolicitud}}{{inpEmailSol}}{{/each}}">
+    <input id="inpAsuntoSol_aux" style="display: none;" name="inpAsuntoSol_aux"
+        value="{{#each idSolicitud}}{{inpAsunSol}}{{/each}}">
+    <input id="inpTipoSol_aux" style="display: none;" name="inpTipoSol_aux"
+        value="{{#each idSolicitud}}{{inpTipoSol}}{{/each}}">
+    <input id="inpAutResponse_aux" style="display: none;" name="inpAutResponse_aux"
+        value="{{#each idSolicitud}}{{AutResponse}}{{/each}}">
+    <input id="inpAutEmailSolDet_aux" style="display: none;" name="inpAutEmailSolDet_aux"
+        value="{{#each idSolicitud}}{{inpAutEmailSol}}{{/each}}">
+    <input id="inpPrioDetSol_aux" style="display: none;" name="inpPrioDetSol_aux"
+        value="{{#each idSolicitud}}{{inpPrioridadSol}}{{/each}}">
+        
+
+
+    <!--DATA SOLICITUDES-->
+    <div class="rowregsol">
+        <div class="mt-3 ml-3 areaform">
+            <a id="btnAyudaSol" class="btn btn-primary ml-2 float-right" data-toggle="modal" data-target="#ayudaModal">
+                <i class="fa fa-question-circle"></i>
+            </a>
+            <p style="color: #ffffff;" class="col-md-8 mt-2">
+                <b>GESTIONAR SOLICITUD</b>&nbsp; <i class="fa fa-chevron-right" aria-hidden="true"></i> ID #{{#each
+                    idSolicitud}}{{inpIDSol}}{{/each}}
+            </p>
+            <hr class="hr">
+
+            <div class="row rowges">
+                <div class="col-md-7 areaformges">
+
+                    <!--AREA 1-->
+                    <div id="areages1" class="areaformgestion2 text-white">
+                        <div class="form-row mt-3">
+                            <p class="col-md-6">
+                                <b>Detalle de la Gestión:</b>
+                            </p>
+                        </div>
+                        <div class="form-row">
+
+                            <label id="gestDir1" for="gestDir2" style="font-size: 14px;" class="mr-2 ml-2">
+                                Dirigido a:
+                            </label>
+                            <div class="col-md-4 form-group" id="gestDir2">
+                                <input type="text" value="{{#each idSolicitud}}{{inpNomRecepSol}}{{/each}}"
+                                    class="form-control" disabled>
+                            </div>
+
+                            <label for="inpCambEstSol" style="font-size: 14px;" class="mr-1 ml-1" id="gestDir3">
+                                Cambiar Estado:
+                            </label>
+                            <div class="form-group col-md-4" id="gestDir4">
+                                <select type="text" class="form-control" id="inpCambEstSol" name="inpCambEstSol"
+                                    disabled>
+                                    <option value="" disabled selected>Seleccionar...</option>
+                                    {{#each estados}}
+                                    <option value="{{nombre}}">{{nombre}}</option>
+                                    {{/each}}
+                                </select>
+                            </div>
+
+                            <label for="inpFchMisoCom" style="font-size: 14px;" class="mr-1 ml-2">
+                                Fecha Compromiso:
+                            </label>
+                            <div class="col-md-3 form-group">
+                                <input type="date" id="inpFchMisoCom" name="inpFchMisoCom"
+                                    value="{{#each gestData}}{{inpFchMisoCom}}{{/each}}" class="form-control datepicker"
+                                    disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label for="inpObsComent" style="font-size: 14px;" class="mr-2 ml-1">
+                                Observaciones:
+                            </label>
+                            <div class="form-group col-md-9 ml-1">
+                                <textarea maxlength="107" id="inpObsComent" class="form-control" name="inpObsComent"
+                                    placeholder="(Max. 100 Caracteres)"
+                                    disabled>{{#each gestData}}{{inpObsComent}}{{/each}}</textarea>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--AREA 2-->
+                    {{#each idSolicitud}}
+                    <div class="areaformges mt-3" style="background:#949ba5;">
+                        <div class="form-row">
+                            <label for="inpFechaDetSol" style="font-size: 14px;" class="ml-1">
+                                Fecha Solicitud:
+                            </label>
+                            <div class="col-md-3 ml-2 form-group">
+                                <input id="inpFechaDetSol" type="date" name="inpFechaDetSol"
+                                    class="form-control datepicker" value="{{inpFechaSol}}" disabled>
+                            </div>
+                            <label for="inpDiasDetSol" style="font-size: 14px;" class="ml-1">
+                                Días Transcurridos:
+                            </label>
+                            <div class="col-md-1 ml-2 form-group">
+                                <input id="inpDiasDetSol" type="text" name="inpDiasDetSol" class="form-control"
+                                    value="" style="color: #dd2e44;" disabled>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <label for="inpEstadoDetSol" style="font-size: 14px;" class="ml-1">
+                                Estado Solicitud:
+                            </label>
+                            <div class="col-md-3 ml-1 form-group">
+                                <input id="inpEstadoDetSol" name="inpEstadinpEstadoDetSoloDetSol" class="form-control"
+                                    value="{{inpEstadoSol}}" disabled>
+                            </div>
+                            <label for="inpPrioDetSol" style="font-size: 14px;" class="ml-1">Prioridad
+                                Solicitud:</label>
+                            <div class="col-md-2 ml-2 form-group">
+                                <span id="inpPrioDetSol" type="text" name="inpPrioDetSol" class="form-control"
+                                    value="{{inpPrioridadSol}}" readonly disabled><img class="mr-1"
+                                        src="{{imgPrioriSrc}}" width="10" height="10" />{{inpPrioridadSol}}</span>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <label for="inpAsuntoSol" style="font-size: 14px;" class="ml-1">
+                                Asunto Solicitud:
+                            </label>
+                            <div class="col-md-7 form-group ml-1">
+                                <input id="inpAsuntoSol" name="inpAsuntoSol" class="form-control" value="{{inpAsunSol}}"
+                                    disabled>
+                            </div>
+                            <div class="col-md-1 ml-1 form-group">
+                                <a id="btnExpandSol" name="btnExpandSol" class="btn btn-dark1 text-white"
+                                    data-toggle="modal" data-target="#detalleModal">
+                                    <i class="fa fa-plus-circle"></i>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            {{#if inpAutEmailSol}}
+                            <label for="inpNomSoldet" style="color: #d41b3b;font-size: 14px;"
+                                class="ml-1 mr-1">Autorización y &nbsp;&nbsp;<br>
+                                Respuesta:</label>
+                            <div class="col-md-5 ml-1 mr-1 form-group">
+                                <input type="text" class="form-control" id="inpAutEmailSolDet" name="inpAutEmailSolDet"
+                                    value="{{inpAutEmailSol}}" disabled>
+                            </div>
+                            {{else}}
+                            <label for="inpNomSoldet" style="font-size: 14px;" class="ml-1 mr-1">Autorización:</label>
+                            <div class="col-md-5 ml-1 mr-1 form-group">
+                                <input type="text" class="form-control" id="inpNomSoldet" name="inpNomSoldet" value=""
+                                    disabled>
+                            </div>
+                            {{/if}}
+
+                            {{#if AutResponse}}
+                            <div class="col-md-3 form-group">
+                                <input type="text" class="form-control" id="inpAutResponse" name="inpAutResponse"
+                                    value="{{AutResponse}}" disabled>
+                            </div>
+                            {{else}}
+                            <div class="col-md-3 form-group">
+                                <input type="text" class="form-control" id="inpAutResponse" name="inpAutResponse"
+                                    value="" disabled>
+                            </div>
+                            {{/if}}
+                        </div>
+                    </div>
+                </div>
+
+                <!-- MODAL DETALLE -->
+                <div class="modal fade" id="detalleModal" tabindex="-1">
+                    <div class="modal-dialog modal-xl">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="gridModalLabel">Detalle de Solicitud #{{inpIDSol}}</h5>
+                                <a class="close" data-dismiss="modal"><span>×</span></a>
+                            </div>
+                            <div class="modal-body">
+
+                                <div class="form-row areaformgesmodal">
+                                    <div class="form-group col-md-3">
+                                        <label for="inpTipoSolDet">Tipo Solicitud:</label>
+                                        <input type="text" class="form-control" id="inpTipoSolDet" name="inpTipoSolDet"
+                                            value="{{inpTipoSol}}" disabled>
+                                    </div>
+                                    <div class="form-group col-md-3">
+                                        <label for="inpFchNecesariaSolDet">Fecha Necesaria:</label>
+                                        <input type="date" id="inpFchNecesariaSolDet" name="inpFchNecesariaSolDet"
+                                            class="form-control datepicker" value="{{inpFchNecesariaSol}}" disabled>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="inpTipoSoldet">Dirigido a:</label>
+                                        <input type="text" class="form-control" id="inpNomRecepSolDet"
+                                            name="inpNomRecepSolDet" value="{{inpNomRecepSol}}" disabled>
+                                    </div>
+
+                                </div>
+
+                                <div class="form-row areaformgesmodal mt-2">
+                                    <div class="form-group col-md-8">
+                                        <label for="inpDetalleSoldet">Detalle:</label>
+                                        <textarea id="inpDetalleSoldet" class="form-control" name="inpDetalleSoldet"
+                                            disabled>{{inpDetalleSol}}</textarea>
+                                    </div>
+                                    <div class="form-group col-md-4">
+                                        <label for="viewFileDet">Archivo Cargado:</label>
+                                        {{#if inpUrlFile}}
+                                        <br>
+                                        <a id="viewFileDet" class="btn btn-dark1 text-white ml-3" title="Ver Archivo"
+                                            target="_blank" href="{{inpUrlFile}}">
+                                            <i class="fa fa-file-text-o"></i><span style="font-size: 11px;">
+                                                &nbsp;Abrir</span></a>
+                                        {{else}}
+                                        <br>
+                                        <a id="viewFileDet" class="btn btn-dark1 text-white ml-3" title="Ver Archivo"
+                                            disabled>
+                                            <i class="fa fa-file-o"></i><span style="font-size: 11px;">
+                                                &nbsp;Vacío</span></a>
+                                        {{/if}}
+                                    </div>
+                                </div>
+
+                                <div class="form-row areaformgesmodal mt-2">
+                                    <table id="myTable" class="form-group">
+                                        <tbody>
+
+                                            {{#if inpDescProdSol0}}
+                                            <!--ROW0-->
+                                            <tr class="form-row formcompra">
+                                                <td class="col-md-5">
+                                                    <label for="inpDescProdSol0det">Descripción:</label>
+                                                    <input type="text" id="inpDescProdSol0det" class="form-control"
+                                                        value="{{inpDescProdSol0}}" name="inpDescProdSol0det" disabled>
+                                                </td>
+                                                <td class="col-md-2">
+                                                    <label for="inpCantProdSol0det">Cantidad:</label>
+                                                    <input type="number" id="inpCantProdSol0det"
+                                                        name="inpCantProdSol0det" value="{{inpCantProdSol0}}"
+                                                        class="form-control" disabled>
+                                                </td>
+                                                <td class="col-md-1">
+                                                    <label for="inpUndMedSol0det">U.Medida:</label>
+                                                    <input class="form-control" id="inpUndMedSol0det"
+                                                        name="inpUndMedSol0det" value="{{inpUndMedSol0}}" disabled>
+                                                </td>
+                                            </tr>
+                                            {{/if}}
+
+                                            {{#if AddDescProdSol0}}
+                                            <!--ADDROW0-->
+                                            <tr class="form-row formcompra">
+                                                <td class="col-md-5 mt-1">
+                                                    <input type="text" id="AddDescProdSol0" class="form-control"
+                                                        value="{{AddDescProdSol0}}" name="AddDescProdSol0" disabled>
+                                                </td>
+                                                <td class="col-md-2 mt-1">
+                                                    <input type="number" id="AddCantProdSol0" name="AddCantProdSol0"
+                                                        value="{{AddCantProdSol0}}" class="form-control" disabled>
+                                                </td>
+                                                <td class="col-md-1 mt-1">
+                                                    <input class="form-control" id="AddUndMedSol0" name="AddUndMedSol0"
+                                                        value="{{AddUndMedSol0}}" disabled>
+                                                </td>
+                                                {{/if}}
+
+                                                {{#if AddDescProdSol1}}
+                                                <!--ADDROW1-->
+                                            <tr class="form-row formcompra">
+                                                <td class="col-md-5 mt-1">
+                                                    <input type="text" id="AddDescProdSol1det" class="form-control"
+                                                        value="{{AddDescProdSol1}}" name="AddDescProdSol1det" disabled>
+                                                </td>
+                                                <td class="col-md-2 mt-1">
+                                                    <input type="number" id="AddCantProdSol1" name="AddCantProdSol1"
+                                                        value="{{AddCantProdSol1}}" class="form-control" disabled>
+                                                </td>
+                                                <td class="col-md-1 mt-1">
+                                                    <input class="form-control" id="AddUndMedSol1" name="AddUndMedSol1"
+                                                        value="{{AddUndMedSol1}}" disabled>
+                                                </td>
+                                                {{/if}}
+
+                                                {{#if AddDescProdSol2}}
+                                                <!--ADDROW2-->
+                                            <tr class="form-row formcompra">
+                                                <td class="col-md-5 mt-1">
+                                                    <input type="text" id="AddDescProdSol2" class="form-control"
+                                                        value="{{AddDescProdSol2}}" name="AddDescProdSol2" disabled>
+                                                </td>
+                                                <td class="col-md-2 mt-1">
+                                                    <input type="number" id="AddCantProdSol2" name="AddCantProdSol2"
+                                                        value="{{AddCantProdSol2}}" class="form-control" disabled>
+                                                </td>
+                                                <td class="col-md-1 mt-1">
+                                                    <input class="form-control" id="AddUndMedSol2" name="AddUndMedSol2"
+                                                        value="{{AddUndMedSol2}}" disabled>
+                                                </td>
+                                                {{/if}}
+
+                                                {{#if AddDescProdSol3}}
+                                                <!--ADDROW3-->
+                                            <tr class="form-row formcompra">
+                                                <td class="col-md-5 mt-1">
+                                                    <input type="text" id="AddDescProdSol3" class="form-control"
+                                                        value="{{AddDescProdSol3}}" name="AddDescProdSol3" disabled>
+                                                </td>
+                                                <td class="col-md-2 mt-1">
+                                                    <input type="number" id="AddCantProdSol3" name="AddCantProdSol3"
+                                                        value="{{AddCantProdSol3}}" class="form-control" disabled>
+                                                </td>
+                                                <td class="col-md-1 mt-1">
+                                                    <input class="form-control" id="AddUndMedSol3" name="AddUndMedSol3"
+                                                        value="{{AddUndMedSol3}}" disabled>
+                                                </td>
+                                                {{/if}}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+                <!--AREA 3-->
+                <div class="col-md-5 areaformges" style="background:#949ba5;">
+                    <span id="titCommentSol" class="text-white float-right">
+                        Comentarios <i class="fa fa fa-comments-o"></i>
+                    </span>
+                    <span class="mt-1 form-group">
+                        Emisor Solicitud: <b>{{#each idSolicitud}}{{inpNomSol}}{{/each}}</b>
+                    </span>
+
+                    <!--COMENTARIOS-->
+                    <div class="divcomment">
+
+                        <table id="tablanewcomment" class="newcomment container">
+                            <tbody>
+                            </tbody>
+                        </table>
+
+                        <table id="tablacomment" class=" form-group comment container">
+                            <tbody>
+                                {{#each gestCom}}
+                                {{#if inpComentSol}}
+                                <tr>
+                                    <td>
+                                        <div class="areaform3">
+                                            <div class="text-center mr-2 mb-2 float-left" style="height:auto;">
+                                                <div class="containerProfile">
+                                                <img class="commentIMG" src="/img/user_bg.png" />
+                                                <div class="centered">{{inpCharuser}}</div>
+                                                </div>
+                                            </div>
+                                            <div class="text-left float-left col-md-10">
+                                                <textarea rows="3" id="inpComentSol_load" class="form-control"
+                                                    style="font-size: 11px;" disabled>{{inpComentSol}}</textarea>
+                                                <a style="font-size: 11px; color:#ffffff;"
+                                                    id="inpNamUserCom_load">{{inpNamUserCom}}</a>
+                                                <a style="font-size: 11px; color:#ffffff;">-</a>
+                                                <a style="font-size: 11px; color:#ffffff;"
+                                                    id="inpFchComent_load">{{inpFchComent}}</a>
+                                            </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                                {{/if}}
+                                {{/each}}
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--SUBMIT-->
+    <div class="rowreg areaformtrans ml-0">
+        <div class="col-md-4">
+            <button type="submit" id="btnGuardarSol" class="btn btn-primary float-left">
+                <i class="fa fa-floppy-o"></i>&nbsp; Guardar
+            </button>
+            <a id="btnCancelSol" class="btn btn-primary ml-3 float-left">
+                <i class="fa fa-times-circle-o"></i>&nbsp; Cancelar
+            </a>
+        </div>
+    </div>
+</form>
+
+<!--SCRIPTS-->
+<script type="module" src="/./js/gestionar.js"></script>
+
+<script>
+    //DATE FILTER
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, '0');
+    var mm = String(today.getMonth() + 1).padStart(2, '0');
+    var yyyy = today.getFullYear();
+    today = yyyy + '-' + mm + '-' + dd;
+    $('#inpFchMisoCom').attr('min', today);
+
+    const firebase = sessionStorage.getItem("user");
+    const userlog = (JSON.parse(firebase));
+    const uid = userlog.uid;
+
+    function perfilID() {
+        window.location.href = "/perfil/" + uid;
+    }
+    function regID() {
+        window.location.href = "/reg/" + uid + "/" + "data";
+    }
+    function gesID() {
+        window.location.href = "/ges/" + uid + "/" + "data";
+    }
+    function inicioID() {
+        window.location.href = "/inicio/" + uid;
+    }
+    function infoID() {
+        window.location.href = "/info/" + uid;
+    }
+</script>
